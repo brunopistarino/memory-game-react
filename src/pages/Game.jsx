@@ -61,10 +61,6 @@ function Game({ rows, cols, couples }) {
     setIsFinished(true);
   };
 
-  document
-    .querySelector('meta[name="theme-color"]')
-    .setAttribute("content", "#123456");
-
   const handleReset = () => {
     setFlippedCells([]);
     setMoves(0);
@@ -114,12 +110,18 @@ function Game({ rows, cols, couples }) {
     return count;
   }
 
+  useEffect(() => {
+    document
+      .querySelector('meta[name="theme-color"]')
+      .setAttribute("content", "#fcfcfc");
+  }, []);
+
   return (
     <div id="game-view">
       {!rows || !cols ? <Navigate to="/" /> : null}
 
       <header>
-        <h1>Memory Game</h1>
+        <h1>memory</h1>
         <div className="buttons">
           {/* <a href="/game">Restart</a> */}
           <Link to="#" onClick={handleReset}>

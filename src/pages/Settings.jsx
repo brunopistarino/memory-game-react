@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import Slider from "../components/Slider";
+
 const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
@@ -8,15 +10,16 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [imposible, setImposible] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
 
-  const maxRows = 8;
   const minRows = 2;
-  const maxCols = 8;
+  const maxRows = 8;
   const minCols = 2;
+  const maxCols = 8;
 
   const navigate = useNavigate();
 
   const handleRowsChange = (e) => {
     setRows(e.target.value);
+    console.log("rows", e.target.value);
   };
 
   const handleColsChange = (e) => {
@@ -59,9 +62,15 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
     navigate("/game");
   };
 
+  useEffect(() => {
+    document
+      .querySelector('meta[name="theme-color"]')
+      .setAttribute("content", "#152938");
+  }, []);
+
   return (
     <div id="settings-view">
-      <h1>Settings</h1>
+      <h1>memory</h1>
 
       <main>
         <div className="info-row">
@@ -75,7 +84,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
           </div>
         </div>
 
-        <fieldset>
+        {/* <fieldset>
           <p>Number of rows {rows}</p>
           <input
             type="range"
@@ -86,9 +95,24 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
             name=""
             id=""
           />
-        </fieldset>
+        </fieldset> */}
+        <Slider
+          min={minRows}
+          max={maxRows}
+          value={rows}
+          type={"rows"}
+          onChange={handleRowsChange}
+        />
 
-        <fieldset>
+        <Slider
+          min={minCols}
+          max={maxCols}
+          value={cols}
+          type={"columns"}
+          onChange={handleColsChange}
+        />
+
+        {/* <fieldset>
           <p>Number of columns {cols}</p>
           <input
             type="range"
@@ -99,7 +123,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
             name=""
             id=""
           />
-        </fieldset>
+        </fieldset> */}
 
         {imposible ? (
           <button disabled>Start Game</button>

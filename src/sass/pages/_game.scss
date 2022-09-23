@@ -148,6 +148,8 @@
   aspect-ratio: 1/1;
   flex: 1;
   max-width: 7rem;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 
   button {
     width: 100%;
