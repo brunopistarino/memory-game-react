@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Options = ({ updateRows, updateCols, updateCouples }) => {
+const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
   const [couples, setCouples] = useState(8);
@@ -60,45 +60,47 @@ const Options = ({ updateRows, updateCols, updateCouples }) => {
   };
 
   return (
-    <div>
-      <h1>Options</h1>
+    <div id="settings-view">
+      <h1>Settings</h1>
 
-      <p>Parejas: {couples}</p>
+      <main>
+        <p>Parejas: {couples}</p>
 
-      <fieldset>
-        <p>{rows}</p>
-        <input
-          type="range"
-          onChange={(e) => handleRowsChange(e)}
-          value={rows}
-          min={minRows}
-          max={maxRows}
-          name=""
-          id=""
-        />
-      </fieldset>
+        <fieldset>
+          <p>{rows}</p>
+          <input
+            type="range"
+            onChange={(e) => handleRowsChange(e)}
+            value={rows}
+            min={minRows}
+            max={maxRows}
+            name=""
+            id=""
+          />
+        </fieldset>
 
-      <fieldset>
-        <p>{cols}</p>
-        <input
-          type="range"
-          onChange={(e) => handleColsChange(e)}
-          value={cols}
-          min={minCols}
-          max={maxCols}
-          name=""
-          id=""
-        />
-      </fieldset>
+        <fieldset>
+          <p>{cols}</p>
+          <input
+            type="range"
+            onChange={(e) => handleColsChange(e)}
+            value={cols}
+            min={minCols}
+            max={maxCols}
+            name=""
+            id=""
+          />
+        </fieldset>
 
-      {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
-      {imposible ? (
-        <button disabled>Start</button>
-      ) : (
-        <button onClick={handleStart}>Start</button>
-      )}
+        {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
+        {imposible ? (
+          <button disabled>Start</button>
+        ) : (
+          <button onClick={handleStart}>Start Game</button>
+        )}
+      </main>
     </div>
   );
 };
 
-export default Options;
+export default Settings;

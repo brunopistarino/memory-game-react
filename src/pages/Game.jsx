@@ -1,11 +1,10 @@
-import "../App.scss";
 import { useEffect, useState } from "react";
-import Cell from "../components/Cell";
-import Timer from "../components/Timer";
 import { Link, Navigate } from "react-router-dom";
 
+import Cell from "../components/Cell";
+import Timer from "../components/Timer";
+
 function Game({ rows, cols, couples }) {
-  //   const [cellsNumber, setCellsNumber] = useState(rows * cols);
   const [cellsNumber, setCellsNumber] = useState((rows * cols) / 2);
   const [matrix, setMatrix] = useState([]);
   const [flippedCells, setFlippedCells] = useState([]);
@@ -42,7 +41,7 @@ function Game({ rows, cols, couples }) {
       setMoves(moves + 1);
       setTimeout(function () {
         setFlippedCells([]);
-      }, 1000);
+      }, 800);
     }
     console.log("flippedCells", flippedCells);
   }, [flippedCells]);
@@ -124,13 +123,12 @@ function Game({ rows, cols, couples }) {
               {row.map((cell, j) => (
                 <Cell
                   key={j}
-                  isFlipped={cell.isFlipped}
                   isMatched={cell.isMatched}
                   value={cell.value}
                   onClick={handleClick}
                   row={i}
                   col={j}
-                  flipped={flippedCells.some(
+                  isFlipped={flippedCells.some(
                     (flippedCell) =>
                       flippedCell.row === i && flippedCell.col === j
                   )}

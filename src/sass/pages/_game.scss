@@ -1,28 +1,3 @@
-$bg-color: #fff;
-$primary-600: #304859;
-
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
-
 // .game-board {
 //   display: flex;
 //   flex-direction: column;
@@ -74,7 +49,7 @@ code {
   gap: 1rem;
   min-height: 100vh;
   background-color: $bg-color;
-  padding: 4rem;
+  padding: 3.5rem;
 
   header {
     display: flex;
@@ -124,11 +99,11 @@ code {
 
       p {
         color: #7191a5;
-        font-family: "Space Mono", monospace;
+        // font-family: "Space Mono", monospace;
       }
       h2 {
-        color: #304859;
-        font-family: "Space Mono", monospace;
+        color: $primary-600;
+        @include number-md-bold;
       }
     }
   }
@@ -137,7 +112,7 @@ code {
 .game-board {
   display: flex;
   flex-direction: column;
-  border: 1px solid #000;
+  // border: 1px solid #000;
   gap: 1rem;
   // max-height: 50vh;
   // height: 100%;
@@ -176,29 +151,10 @@ code {
     height: 100%;
     position: absolute;
     border: none;
-    transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
     background-color: $primary-600;
     cursor: pointer;
     // background-color: rgba(0, 0, 0, 0.374);
     border-radius: 0.5rem;
-  }
-
-  &.flipped {
-    button {
-      transform: scale(0);
-    }
-    p {
-      background-color: #fda214;
-    }
-  }
-
-  &.matched {
-    button {
-      transform: scale(0);
-    }
-    p {
-      // background-color: #00b894;
-    }
   }
 
   p {
@@ -212,6 +168,72 @@ code {
     font-size: 3rem;
     font-weight: bold;
     border-radius: 0.5rem;
-    transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    cursor: default;
   }
 }
+
+.cell {
+  &.flipped {
+    // color: white;
+
+    button {
+      transform: rotateY(-180deg);
+    }
+    p {
+      transform: rotateY(0);
+    }
+  }
+
+  &.matched {
+    button {
+      background-color: #dfe7ec;
+      transform: rotateY(-180deg);
+    }
+    p {
+      transform: rotateY(0);
+      // color: #7191a5;
+      background-color: #dfe7ec;
+    }
+  }
+
+  p {
+    // transition: transform 0.25s linear;
+    transition: all 0.25s linear;
+    // transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    background-color: $orange-500;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+  }
+
+  button {
+    // transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+    // transition: transform 0.25s linear;
+    transition: all 0.25s linear;
+
+    transform: rotateY(0);
+  }
+}
+
+// .cell {
+//   &.matched {
+//     button {
+//       transform: scale(0);
+//     }
+//     p {
+//       // background-color: #00b894;
+//     }
+//   }
+
+//   &.flipped {
+//     button {
+//       transform: scale(0);
+//     }
+//     p {
+//       background-color: #fda214;
+//     }
+//   }
+//   button,
+//   p {
+//     transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
+//   }
+// }

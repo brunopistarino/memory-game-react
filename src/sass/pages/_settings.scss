@@ -1,0 +1,29 @@
+#settings-view {
+  background-color: $bg-dark-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+
+  main {
+    background-color: $bg-color;
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  button {
+    width: 100%;
+    border: none;
+    background-color: $orange-500;
+    color: $bg-color;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 100px;
+  }
+}

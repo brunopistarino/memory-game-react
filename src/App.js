@@ -1,9 +1,9 @@
-import "./App.scss";
+import "./sass/main.scss";
 import { useEffect, useState } from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Options from "./pages/Options";
+import Settings from "./pages/Settings";
 import Game from "./pages/Game";
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Options
+            <Settings
               updateRows={handleRows}
               updateCols={handleCols}
               updateCouples={handleCouples}
