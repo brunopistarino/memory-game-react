@@ -64,10 +64,19 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
       <h1>Settings</h1>
 
       <main>
-        <p>Parejas: {couples}</p>
+        <div className="info-row">
+          <div className="info-container">
+            <p>Parejas:</p>
+            <p>{couples}</p>
+          </div>
+          <div className="info-container">
+            <p>Difficulty:</p>
+            {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
+          </div>
+        </div>
 
         <fieldset>
-          <p>{rows}</p>
+          <p>Number of rows {rows}</p>
           <input
             type="range"
             onChange={(e) => handleRowsChange(e)}
@@ -80,7 +89,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
         </fieldset>
 
         <fieldset>
-          <p>{cols}</p>
+          <p>Number of columns {cols}</p>
           <input
             type="range"
             onChange={(e) => handleColsChange(e)}
@@ -92,9 +101,8 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
           />
         </fieldset>
 
-        {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
         {imposible ? (
-          <button disabled>Start</button>
+          <button disabled>Start Game</button>
         ) : (
           <button onClick={handleStart}>Start Game</button>
         )}

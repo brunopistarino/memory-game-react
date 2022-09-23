@@ -5,10 +5,11 @@ import Cell from "../components/Cell";
 import Timer from "../components/Timer";
 
 function Game({ rows, cols, couples }) {
-  const [cellsNumber, setCellsNumber] = useState((rows * cols) / 2);
   const [matrix, setMatrix] = useState([]);
   const [flippedCells, setFlippedCells] = useState([]);
   const [moves, setMoves] = useState(0);
+  const [restart, setRestart] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   const handleClick = (row, col) => {
     if (flippedCells.length === 2) {
@@ -35,31 +36,49 @@ function Game({ rows, cols, couples }) {
         console.log("match");
         matrix[firstCell.row][firstCell.col].isMatched = true;
         matrix[secondCell.row][secondCell.col].isMatched = true;
+        setFlippedCells([]);
+        checkIfWon();
       } else {
         console.log("no match");
+        setTimeout(function () {
+          setFlippedCells([]);
+        }, 700);
       }
       setMoves(moves + 1);
-      setTimeout(function () {
-        setFlippedCells([]);
-      }, 800);
     }
     console.log("flippedCells", flippedCells);
   }, [flippedCells]);
 
-  // setCellsNumber(rows * cols / 2);
-  // useEffect(() => {
-  //   setCellsNumber(rows * cols / 2);
-  // }, [rows, cols]);
+  const checkIfWon = () => {
+    for (let i = 0; i < rows; i++) {
+      for (let j = 0; j < cols; j++) {
+        if (!matrix[i][j].isMatched) {
+          return;
+        }
+      }
+    }
+    // return true;
+    setIsFinished(true);
+  };
 
-  // const loadCells = () => {
-  //   const cells = [];
-  //   for (let i = 0; i < rows; i++) {
-  //     for (let j = 0; j < cols; j++) {
-  //       cells.push({ row: i, col: j });
-  //     }
+  const handleReset = () => {
+    setFlippedCells([]);
+    setMoves(0);
+    setRestart(!restart);
+  };
+
+  useEffect(() => {
+    if (isFinished) {
+      // console.log("game ended");
+      alert("You won!");
+    }
+  }, [isFinished]);
+
+  // useEffect(() => {
+  //   if (checkIfWon()) {
+  //     setIsFinished(true);
   //   }
-  //   setCells(cells);
-  // };
+  // }, [matrix]);
 
   // load matrix with couples of numbers that didn't repeat
   useEffect(() => {
@@ -68,10 +87,9 @@ function Game({ rows, cols, couples }) {
     for (let i = 0; i < rows; i++) {
       const row = [];
       for (let j = 0; j < cols; j++) {
-        let number = Math.floor(Math.random() * cellsNumber) + 1;
-        // while (numbers.includes(number)) {
+        let number = Math.floor(Math.random() * couples) + 1;
         while (countInArray(numbers, number) >= 2) {
-          number = Math.floor(Math.random() * cellsNumber) + 1;
+          number = Math.floor(Math.random() * couples) + 1;
           console.log("number", number);
         }
         numbers.push(number);
@@ -80,7 +98,7 @@ function Game({ rows, cols, couples }) {
       mat.push(row);
     }
     setMatrix(mat);
-  }, []);
+  }, [restart]);
 
   function countInArray(array, number) {
     var count = 0;
@@ -91,16 +109,6 @@ function Game({ rows, cols, couples }) {
     }
     return count;
   }
-  //   }, [rows, cols, cellsNumber]);
-
-  // const matrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]];
-
-  //   useEffect(() => {
-  //     // setCellsNumber(rows * cols / 2);
-  //     // loadMatrix();
-  //     console.log("matrix", matrix);
-  //     console.log("cellsNumber", cellsNumber);
-  //   }, []);
 
   return (
     <div id="game-view">
@@ -110,7 +118,9 @@ function Game({ rows, cols, couples }) {
         <h1>Memory Game</h1>
         <div className="buttons">
           {/* <a href="/game">Restart</a> */}
-          <Link to="/game">Restart</Link>
+          <Link to="#" onClick={handleReset}>
+            Restart
+          </Link>
           <Link to="/">New Game</Link>
           {/* <a href="/">New Game</a> */}
         </div>
@@ -142,7 +152,7 @@ function Game({ rows, cols, couples }) {
       <footer>
         <div className="data-field">
           <p>Time</p>
-          <Timer />
+          <Timer restart={restart} />
         </div>
         <div className="data-field">
           <p>Moves</p>

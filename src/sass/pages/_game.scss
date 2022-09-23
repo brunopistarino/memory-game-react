@@ -188,6 +188,7 @@
     button {
       background-color: #dfe7ec;
       transform: rotateY(-180deg);
+      animation-delay: 250ms;
     }
     p {
       transform: rotateY(0);
@@ -198,7 +199,7 @@
 
   p {
     // transition: transform 0.25s linear;
-    transition: all 0.25s linear;
+    transition: all 0.25s linear, background-color 0.25s linear 300ms;
     // transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
     background-color: $orange-500;
     backface-visibility: hidden;
@@ -237,3 +238,26 @@
 //     transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
 //   }
 // }
+
+@media screen and (max-width: 768px) {
+  // .game-board {
+  // }
+  #game-view {
+    padding: 1.5rem;
+    main {
+      max-width: 90vw;
+    }
+    .game-board {
+      gap: 0.75rem;
+    }
+    .row {
+      gap: 0.75rem;
+    }
+    footer {
+      flex-direction: column;
+      .data-field {
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Timer = () => {
+const Timer = ({ restart }) => {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(true);
   const [time, setTime] = useState(null);
@@ -15,6 +15,10 @@ const Timer = () => {
   }
 
   useEffect(() => {
+    setSeconds(0);
+  }, [restart]);
+
+  useEffect(() => {
     let interval = null;
     if (isActive) {
       interval = setInterval(() => {
@@ -27,7 +31,6 @@ const Timer = () => {
   }, [isActive, seconds]);
 
   useEffect(() => {
-    // setTime(new Date(seconds * 1000).toISOString().substr(11, 8));
     setTime(new Date(seconds * 1000).toISOString().substring(14, 19));
   }, [seconds]);
 
