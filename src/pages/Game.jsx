@@ -61,6 +61,10 @@ function Game({ rows, cols, couples }) {
     setIsFinished(true);
   };
 
+  document
+    .querySelector('meta[name="theme-color"]')
+    .setAttribute("content", "#123456");
+
   const handleReset = () => {
     setFlippedCells([]);
     setMoves(0);

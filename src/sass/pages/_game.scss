@@ -47,9 +47,12 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  min-height: 100vh;
   background-color: $bg-color;
   padding: 3.5rem;
+
+  // min-height: 100vh;
+  min-height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
+  min-height: calc(var(--vh, 1vh) * 100);
 
   header {
     display: flex;
