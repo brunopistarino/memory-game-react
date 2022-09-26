@@ -1,18 +1,8 @@
 import { useState, useEffect } from "react";
 
-const Timer = ({ restart }) => {
+const Timer = ({ restart, stop }) => {
   const [seconds, setSeconds] = useState(0);
-  const [isActive, setIsActive] = useState(true);
   const [time, setTime] = useState(null);
-
-  function toggle() {
-    setIsActive(!isActive);
-  }
-
-  function reset() {
-    setSeconds(0);
-    setIsActive(false);
-  }
 
   useEffect(() => {
     setSeconds(0);
@@ -20,15 +10,15 @@ const Timer = ({ restart }) => {
 
   useEffect(() => {
     let interval = null;
-    if (isActive) {
+    if (!stop) {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
       }, 1000);
-    } else if (!isActive && seconds !== 0) {
+    } else if (stop && seconds !== 0) {
       clearInterval(interval);
     }
     return () => clearInterval(interval);
-  }, [isActive, seconds]);
+  }, [stop, seconds]);
 
   useEffect(() => {
     setTime(new Date(seconds * 1000).toISOString().substring(14, 19));
@@ -36,4 +26,5 @@ const Timer = ({ restart }) => {
 
   return <h2>{time}</h2>;
 };
+
 export default Timer;

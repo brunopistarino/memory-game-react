@@ -84,46 +84,23 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
           </div>
         </div>
 
-        {/* <fieldset>
-          <p>Number of rows {rows}</p>
-          <input
-            type="range"
-            onChange={(e) => handleRowsChange(e)}
-            value={rows}
+        <div className="sliders">
+          <Slider
             min={minRows}
             max={maxRows}
-            name=""
-            id=""
+            value={rows}
+            type={"rows"}
+            onChange={handleRowsChange}
           />
-        </fieldset> */}
-        <Slider
-          min={minRows}
-          max={maxRows}
-          value={rows}
-          type={"rows"}
-          onChange={handleRowsChange}
-        />
 
-        <Slider
-          min={minCols}
-          max={maxCols}
-          value={cols}
-          type={"columns"}
-          onChange={handleColsChange}
-        />
-
-        {/* <fieldset>
-          <p>Number of columns {cols}</p>
-          <input
-            type="range"
-            onChange={(e) => handleColsChange(e)}
-            value={cols}
+          <Slider
             min={minCols}
             max={maxCols}
-            name=""
-            id=""
+            value={cols}
+            type={"columns"}
+            onChange={handleColsChange}
           />
-        </fieldset> */}
+        </div>
 
         {imposible ? (
           <button disabled>Start Game</button>

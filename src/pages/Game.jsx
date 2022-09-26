@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 
 import Cell from "../components/Cell";
 import Timer from "../components/Timer";
+import Modal from "../components/Modal";
 
 function Game({ rows, cols, couples }) {
   const [matrix, setMatrix] = useState([]);
@@ -10,6 +11,8 @@ function Game({ rows, cols, couples }) {
   const [moves, setMoves] = useState(0);
   const [restart, setRestart] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [stopTimer, setStopTimer] = useState(false);
 
   const handleClick = (row, col) => {
     if (flippedCells.length === 2) {
@@ -57,20 +60,33 @@ function Game({ rows, cols, couples }) {
         }
       }
     }
-    // return true;
+
     setIsFinished(true);
   };
 
   const handleReset = () => {
     setFlippedCells([]);
     setMoves(0);
+    setMenuOpen(false);
+    setStopTimer(false);
     setRestart(!restart);
+  };
+
+  const handleOpenMenu = () => {
+    setMenuOpen(true);
+    setStopTimer(true);
+  };
+
+  const handleCloseMenu = () => {
+    setMenuOpen(false);
+    setStopTimer(false);
   };
 
   useEffect(() => {
     if (isFinished) {
       // console.log("game ended");
-      alert("You won!");
+      // alert("You won!");
+      setStopTimer(true);
     }
   }, [isFinished]);
 
@@ -117,55 +133,85 @@ function Game({ rows, cols, couples }) {
   }, []);
 
   return (
-    <div id="game-view">
-      {!rows || !cols ? <Navigate to="/" /> : null}
+    <>
+      <Modal onClose={() => setIsFinished(false)} show={isFinished || menuOpen}>
+        {menuOpen && (
+          <div className="modal-menu">
+            <Link to="#" onClick={handleReset}>
+              Restart
+            </Link>
+            <Link to="/">New Game</Link>
+            <Link to="#" onClick={handleCloseMenu}>
+              Resume Game
+            </Link>
+          </div>
+        )}
+        {isFinished && (
+          <div className="modal-finished">
+            <h1>You won!</h1>
+            <p>
+              You finished the game in {moves} moves and in{" "}
+              {/* <Timer stop={stopTimer} /> */}
+            </p>
+            <Link to="/" onClick={handleReset}>
+              New Game
+            </Link>
+          </div>
+        )}
+      </Modal>
+      <div id="game-view">
+        {!rows || !cols ? <Navigate to="/" /> : null}
 
-      <header>
-        <h1>memory</h1>
-        <div className="buttons">
-          {/* <a href="/game">Restart</a> */}
-          <Link to="#" onClick={handleReset}>
-            Restart
-          </Link>
-          <Link to="/">New Game</Link>
-          {/* <a href="/">New Game</a> */}
-        </div>
-      </header>
+        <header>
+          <h1>memory</h1>
+          <div className="buttons">
+            <Link className="button" to="#" onClick={handleReset}>
+              Restart
+            </Link>
+            <Link className="button" to="/">
+              New Game
+            </Link>
+            <Link className="menu-btn" to="#" onClick={handleOpenMenu}>
+              Menu
+            </Link>
+          </div>
+        </header>
 
-      <main>
-        <div className="game-board">
-          {matrix.map((row, i) => (
-            <div className="row" key={i}>
-              {row.map((cell, j) => (
-                <Cell
-                  key={j}
-                  isMatched={cell.isMatched}
-                  value={cell.value}
-                  onClick={handleClick}
-                  row={i}
-                  col={j}
-                  isFlipped={flippedCells.some(
-                    (flippedCell) =>
-                      flippedCell.row === i && flippedCell.col === j
-                  )}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
-      </main>
+        <main>
+          <div className="game-board">
+            {matrix.map((row, i) => (
+              <div className="row" key={i}>
+                {row.map((cell, j) => (
+                  <Cell
+                    key={j}
+                    isMatched={cell.isMatched}
+                    value={cell.value}
+                    onClick={handleClick}
+                    row={i}
+                    col={j}
+                    isFlipped={flippedCells.some(
+                      (flippedCell) =>
+                        flippedCell.row === i && flippedCell.col === j
+                    )}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </main>
 
-      <footer>
-        <div className="data-field">
-          <p>Time</p>
-          <Timer restart={restart} />
-        </div>
-        <div className="data-field">
-          <p>Moves</p>
-          <h2>{moves}</h2>
-        </div>
-      </footer>
-    </div>
+        <footer>
+          <div className="data-field">
+            <p>Time</p>
+            <Timer restart={restart} stop={stopTimer} />
+          </div>
+          <div className="data-field">
+            <p>Moves</p>
+            <h2>{moves}</h2>
+          </div>
+        </footer>
+      </div>
+    </>
   );
 }
 

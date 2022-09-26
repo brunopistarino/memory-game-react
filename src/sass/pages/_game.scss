@@ -110,6 +110,10 @@
       }
     }
   }
+
+  .menu-btn {
+    display: none;
+  }
 }
 
 .game-board {
@@ -263,6 +267,12 @@
       .data-field {
         max-width: 100%;
       }
+    }
+    .menu-btn {
+      display: block;
+    }
+    .button {
+      display: none;
     }
   }
 }
