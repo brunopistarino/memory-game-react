@@ -11,9 +11,11 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [difficulty, setDifficulty] = useState("easy");
 
   const minRows = 2;
-  const maxRows = 8;
+  // const maxRows = 8;
+  const maxRows = 6;
   const minCols = 2;
-  const maxCols = 8;
+  // const maxCols = 8;
+  const maxCols = 6;
 
   const navigate = useNavigate();
 

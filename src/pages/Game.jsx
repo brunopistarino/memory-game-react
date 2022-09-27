@@ -180,7 +180,7 @@ function Game({ rows, cols, couples }) {
         <main>
           <div className="game-board">
             {matrix.map((row, i) => (
-              <div className="row" key={i}>
+              <div className={`row ${couples >= 10 && "two-chars"}`} key={i}>
                 {row.map((cell, j) => (
                   <Cell
                     key={j}
