@@ -110,6 +110,40 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
           <button onClick={handleStart}>Start Game</button>
         )}
       </main>
+      <div className="difficulties">
+        <div className="difficulty">
+          <div className="difficuty-text">
+            <div className="difficuty-head">
+              <p>Easy</p>
+              <p>4x4</p>
+            </div>
+            8 pairs
+          </div>
+          <img src="https://via.placeholder.com/150" alt="" />
+        </div>
+
+        <div className="difficulty">
+          <div className="difficuty-text">
+            <div className="difficuty-head">
+              <p>Normal</p>
+              <p>6x6</p>
+            </div>
+            12 pairs
+          </div>
+          <img src="https://via.placeholder.com/150" alt="" />
+        </div>
+
+        <div className="difficulty">
+          <div className="difficuty-text">
+            <div className="difficuty-head">
+              <p>Hard</p>
+              <p>8x8</p>
+            </div>
+            16 pairs
+          </div>
+          <img src="https://via.placeholder.com/150" alt="" />
+        </div>
+      </div>
     </div>
   );
 };
