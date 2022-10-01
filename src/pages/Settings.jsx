@@ -3,12 +3,18 @@ import { useNavigate } from "react-router-dom";
 
 import Slider from "../components/Slider";
 
+// import { ReactComponent as Icon } from "../assets/icons/settings.svg";
+import { ReactComponent as CustomizeIcon } from "../brush-01.svg";
+// import { ReactComponent as Logo } from "../icons/logomark2.svg";
+
 const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
   const [couples, setCouples] = useState(8);
   const [imposible, setImposible] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
+
+  const [custom, setCustom] = useState(false);
 
   const minRows = 2;
   // const maxRows = 8;
@@ -19,62 +25,114 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
 
   const navigate = useNavigate();
 
-  const handleRowsChange = (e) => {
-    setRows(e.target.value);
-    console.log("rows", e.target.value);
+  // const handleRowsChange = (e) => {
+  //   setRows(e.target.value);
+  //   console.log("rows", e.target.value);
+  // };
+
+  // const handleColsChange = (e) => {
+  //   setCols(e.target.value);
+  // };
+
+  // useEffect(() => {
+  //   setCouples((rows * cols) / 2);
+  // }, [rows, cols]);
+
+  // useEffect(() => {
+  //   if (couples % 1 !== 0) {
+  //     setImposible(true);
+  //     return;
+  //   }
+
+  //   setImposible(false);
+  //   if (couples <= 5) {
+  //     setDifficulty("easy");
+  //     return;
+  //   }
+  //   if (couples <= 10) {
+  //     setDifficulty("medium");
+  //     return;
+  //   }
+  //   if (couples <= 15) {
+  //     setDifficulty("hard");
+  //     return;
+  //   }
+  //   // if (couples <= 2) {
+  //   //   setDifficulty("impossible");
+  //   //   return;
+  //   // }
+  // }, [couples]);
+
+  // const difficulties = {
+  //   easy: {
+  //     rows: 2,
+  //     cols: 5,
+  //   },
+  //   medium: {
+  //     rows: 6,
+  //     cols: 10,
+  //   },
+  //   hard: {
+  //     rows: 11,
+  //     cols: 15,
+  //   },
+  //   impossible: {
+  //     rows: 16,
+  //     cols: 20,
+  //   },
+  // };
+  const difficulties = {
+    easy: {
+      rows: 4,
+      cols: 4,
+    },
+    medium: {
+      rows: 6,
+      cols: 6,
+    },
+    hard: {
+      rows: 8,
+      cols: 8,
+    },
   };
 
-  const handleColsChange = (e) => {
-    setCols(e.target.value);
-  };
-
-  useEffect(() => {
-    setCouples((rows * cols) / 2);
-  }, [rows, cols]);
-
-  useEffect(() => {
-    if (couples % 1 !== 0) {
-      setImposible(true);
-      return;
-    }
-
-    setImposible(false);
-    if (couples <= 5) {
-      setDifficulty("easy");
-      return;
-    }
-    if (couples <= 10) {
-      setDifficulty("medium");
-      return;
-    }
-    if (couples <= 15) {
-      setDifficulty("hard");
-      return;
-    }
-    // if (couples <= 2) {
-    //   setDifficulty("impossible");
-    //   return;
-    // }
-  }, [couples]);
-
-  const handleStart = () => {
-    updateRows(rows);
-    updateCols(cols);
-    updateCouples(couples);
+  // const handleStart = () => {
+  //   updateRows(rows);
+  //   updateCols(cols);
+  //   updateCouples(couples);
+  //   navigate("/game");
+  // };
+  const handleStart = (selectedRows, selectedCols) => {
+    updateRows(selectedRows);
+    updateCols(selectedCols);
+    updateCouples((selectedRows * selectedCols) / 2);
     navigate("/game");
   };
+
+  // const handleDifficulty = (selectedRows, selectedCols) => {
+  //   console.log("selectedRows", selectedRows);
+  //   console.log("selectedCols", selectedCols);
+  //   setRows();
+  //   setCols(selectedCols);
+  //   handleStart();
+  // };
 
   useEffect(() => {
     document
       .querySelector('meta[name="theme-color"]')
-      .setAttribute("content", "#152938");
+      .setAttribute("content", "#acd6b8");
   }, []);
 
   return (
     <div id="settings-view">
-      <h1>memory</h1>
+      <header>
+        <h1>memory</h1>
+        <div>
+          <CustomizeIcon />
+        </div>
+      </header>
 
-      <main>
+      {/* <main>
         <div className="info-row">
           <div className="info-container">
             <p>Parejas:</p>
@@ -109,41 +167,76 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
         ) : (
           <button onClick={handleStart}>Start Game</button>
         )}
-      </main>
-      <div className="difficulties">
-        <div className="difficulty">
-          <div className="difficuty-text">
-            <div className="difficuty-head">
-              <p>Easy</p>
-              <p>4x4</p>
-            </div>
-            8 pairs
-          </div>
-          <img src="https://via.placeholder.com/150" alt="" />
-        </div>
+      </main> */}
 
-        <div className="difficulty">
-          <div className="difficuty-text">
-            <div className="difficuty-head">
-              <p>Normal</p>
-              <p>6x6</p>
+      {custom ? (
+        <main>
+          <div className="info-row">
+            <div className="info-container">
+              <p>Parejas:</p>
+              <p>{couples}</p>
             </div>
-            12 pairs
-          </div>
-          <img src="https://via.placeholder.com/150" alt="" />
-        </div>
-
-        <div className="difficulty">
-          <div className="difficuty-text">
-            <div className="difficuty-head">
-              <p>Hard</p>
-              <p>8x8</p>
+            <div className="info-container">
+              <p>Difficulty:</p>
+              {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
             </div>
-            16 pairs
           </div>
-          <img src="https://via.placeholder.com/150" alt="" />
+          <div className="difficulties">
+            <div
+              className="difficulty"
+              onClick={() => {
+                setCustom(true);
+              }}
+            >
+              <p className="title">Custom</p>
+            </div>
+          </div>
+        </main>
+      ) : (
+        <div className="difficulties">
+          {Object.keys(difficulties).map((difficulty) => {
+            const { rows, cols } = difficulties[difficulty];
+            return (
+              <div
+                className="difficulty"
+                key={difficulty}
+                onClick={() => handleStart(rows, cols)}
+              >
+                <div className="difficuty-text">
+                  <div className="difficuty-head">
+                    <p className="title">{difficulty}</p>
+                    <p>{(rows * cols) / 2} pairs</p>
+                  </div>
+                  <div className="size">
+                    <p className="size-text">
+                      {rows} x {cols}
+                    </p>
+                  </div>
+                </div>
+                <div
+                  className="demostration"
+                  style={{
+                    aspectRatio: `${rows}/${cols}`,
+                    gridTemplateColumns: `repeat(${rows}, 1fr)`,
+                  }}
+                >
+                  {[...Array(rows * cols)].map((x, i) => (
+                    <div key={i} className="box" />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+          <div
+            className="difficulty"
+            onClick={() => {
+              setCustom((prev) => !prev);
+            }}
+          >
+            <p className="title">{custom ? "Close" : "Custom"}</p>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
