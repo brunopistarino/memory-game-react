@@ -125,6 +125,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
 
   return (
     <div id="settings-view">
+      {/* <div> */}
       <header>
         <h1>memory</h1>
         <div>
@@ -132,42 +133,6 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
         </div>
       </header>
 
-      {/* <main>
-        <div className="info-row">
-          <div className="info-container">
-            <p>Parejas:</p>
-            <p>{couples}</p>
-          </div>
-          <div className="info-container">
-            <p>Difficulty:</p>
-            {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
-          </div>
-        </div>
-
-        <div className="sliders">
-          <Slider
-            min={minRows}
-            max={maxRows}
-            value={rows}
-            type={"rows"}
-            onChange={handleRowsChange}
-          />
-
-          <Slider
-            min={minCols}
-            max={maxCols}
-            value={cols}
-            type={"columns"}
-            onChange={handleColsChange}
-          />
-        </div>
-
-        {imposible ? (
-          <button disabled>Start Game</button>
-        ) : (
-          <button onClick={handleStart}>Start Game</button>
-        )}
-      </main> */}
       <div className="difficulties">
         {custom ? (
           <div className="custom-settings">
@@ -254,6 +219,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
           <p className="title">{custom ? "Close" : "Custom"}</p>
         </div>
       </div>
+      {/* </div> */}
     </div>
   );
 };
