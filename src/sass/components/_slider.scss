@@ -37,7 +37,7 @@
       -webkit-appearance: none;
       height: 20px;
       width: 20px;
-      background-color: #3264fe;
+      background-color: $main-color;
       border-radius: 50%;
       cursor: pointer;
       margin-top: -6px;
@@ -47,7 +47,7 @@
       -webkit-appearance: none;
       height: 20px;
       width: 20px;
-      background-color: #3264fe;
+      background-color: $main-color;
       border-radius: 50%;
       cursor: pointer;
       margin-top: -6px;
@@ -57,7 +57,7 @@
       appearance: none;
       height: 20px;
       width: 20px;
-      background-color: #3264fe;
+      background-color: $main-color;
       border-radius: 50%;
       cursor: pointer;
       margin-top: -6px;
@@ -65,13 +65,13 @@
     }
     &:active::-webkit-slider-thumb {
       background-color: #ffffff;
-      border: 3px solid #3264fe;
+      border: 3px solid $main-color;
     }
   }
   .slider-value {
     // width: 13%;
     // position: relative;
-    background-color: #3264fe;
+    background-color: $main-color;
     color: #ffffff;
     text-align: center;
     font-family: "Roboto Mono", monospace;

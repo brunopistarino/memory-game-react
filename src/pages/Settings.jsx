@@ -125,101 +125,104 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
 
   return (
     <div id="settings-view">
-      {/* <div> */}
-      <header>
-        <h1>memory</h1>
-        <div>
-          <CustomizeIcon />
-        </div>
-      </header>
-
-      <div className="difficulties">
-        {custom ? (
-          <div className="custom-settings">
-            <div className="info-row">
-              <div className="info-container">
-                <p>{couples}</p>
-                <p>Parejas</p>
-              </div>
-              <div className="info-container">
-                {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
-                <p>Difficulty</p>
-              </div>
-            </div>
-            <div className="sliders">
-              <Slider
-                min={minRows}
-                max={maxRows}
-                value={rows}
-                type={"rows"}
-                onChange={handleRowsChange}
-              />
-
-              <Slider
-                min={minCols}
-                max={maxCols}
-                value={cols}
-                type={"columns"}
-                onChange={handleColsChange}
-              />
-            </div>
-            {imposible ? (
-              <button className="start" disabled>
-                Start Game
-              </button>
-            ) : (
-              <button className="start" onClick={() => handleStart(rows, cols)}>
-                Start Game
-              </button>
-            )}
+      <div className="container">
+        <header>
+          <h1>memory</h1>
+          <div>
+            <CustomizeIcon />
           </div>
-        ) : (
-          <>
-            {Object.keys(difficulties).map((difficulty) => {
-              const { rows, cols } = difficulties[difficulty];
-              return (
-                <div
-                  className="difficulty"
-                  key={difficulty}
+        </header>
+
+        <div className="difficulties">
+          {custom ? (
+            <div className="custom-settings">
+              <div className="info-row">
+                <div className="info-container">
+                  <p>{couples}</p>
+                  <p>Parejas</p>
+                </div>
+                <div className="info-container">
+                  {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
+                  <p>Difficulty</p>
+                </div>
+              </div>
+              <div className="sliders">
+                <Slider
+                  min={minRows}
+                  max={maxRows}
+                  value={rows}
+                  type={"rows"}
+                  onChange={handleRowsChange}
+                />
+
+                <Slider
+                  min={minCols}
+                  max={maxCols}
+                  value={cols}
+                  type={"columns"}
+                  onChange={handleColsChange}
+                />
+              </div>
+              {imposible ? (
+                <button className="start" disabled>
+                  Start Game
+                </button>
+              ) : (
+                <button
+                  className="start"
                   onClick={() => handleStart(rows, cols)}
                 >
-                  <div className="difficuty-text">
-                    <div className="difficuty-head">
-                      <p className="title">{difficulty}</p>
-                      <p>{(rows * cols) / 2} pairs</p>
-                    </div>
-                    <div className="size">
-                      <p className="size-text">
-                        {rows} x {cols}
-                      </p>
-                    </div>
-                  </div>
+                  Start Game
+                </button>
+              )}
+            </div>
+          ) : (
+            <>
+              {Object.keys(difficulties).map((difficulty) => {
+                const { rows, cols } = difficulties[difficulty];
+                return (
                   <div
-                    className="demostration"
-                    style={{
-                      aspectRatio: `${rows}/${cols}`,
-                      gridTemplateColumns: `repeat(${rows}, 1fr)`,
-                    }}
+                    className="difficulty"
+                    key={difficulty}
+                    onClick={() => handleStart(rows, cols)}
                   >
-                    {[...Array(rows * cols)].map((x, i) => (
-                      <div key={i} className="box" />
-                    ))}
+                    <div className="difficuty-text">
+                      <div className="difficuty-head">
+                        <p className="title">{difficulty}</p>
+                        <p>{(rows * cols) / 2} pairs</p>
+                      </div>
+                      <div className="size">
+                        <p className="size-text">
+                          {rows} x {cols}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      className="demostration"
+                      style={{
+                        aspectRatio: `${rows}/${cols}`,
+                        gridTemplateColumns: `repeat(${rows}, 1fr)`,
+                      }}
+                    >
+                      {[...Array(rows * cols)].map((x, i) => (
+                        <div key={i} className="box" />
+                      ))}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </>
-        )}
-        <div
-          className="difficulty"
-          onClick={() => {
-            setCustom((prev) => !prev);
-          }}
-        >
-          <p className="title">{custom ? "Close" : "Custom"}</p>
+                );
+              })}
+            </>
+          )}
+          <div
+            className="difficulty"
+            onClick={() => {
+              setCustom((prev) => !prev);
+            }}
+          >
+            <p className="title">{custom ? "Close" : "Custom"}</p>
+          </div>
         </div>
       </div>
-      {/* </div> */}
     </div>
   );
 };

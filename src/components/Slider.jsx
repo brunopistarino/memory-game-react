@@ -15,7 +15,7 @@ const Slider = ({ min, max, value, type, onChange }) => {
     const valPercent = ((value - min) / (max - min)) * 100;
     console.log("valPercent", valPercent);
     setStyle({
-      background: `linear-gradient(to right, #3264fe ${valPercent}%, #d5d5d5 ${valPercent}%)`,
+      background: `linear-gradient(to right, #acd6b8 ${valPercent}%, #d5d5d5 ${valPercent}%)`,
     });
   }, [value, max]);
 
