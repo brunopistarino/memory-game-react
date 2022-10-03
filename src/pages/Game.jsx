@@ -165,13 +165,13 @@ function Game({ rows, cols, couples }) {
         <header>
           <h1>memory</h1>
           <div className="buttons">
-            <Link className="button" to="#" onClick={handleReset}>
+            <Link className="button clk-btn" to="#" onClick={handleReset}>
               Restart
             </Link>
-            <Link className="button" to="/">
+            <Link className="button clk-btn" to="/">
               New Game
             </Link>
-            <Link className="menu-btn" to="#" onClick={handleOpenMenu}>
+            <Link className="menu-btn clk-btn" to="#" onClick={handleOpenMenu}>
               Menu
             </Link>
           </div>

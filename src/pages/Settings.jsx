@@ -124,12 +124,12 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
       <div className="container">
         <header>
           <h1>memory</h1>
-          <div>
+          <div className="clk-btn">
             <CustomizeIcon />
           </div>
         </header>
 
-        <div className="difficulties">
+        <main>
           {custom ? (
             <div className="custom-settings">
               <div className="info-row">
@@ -178,7 +178,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
                 const { rows, cols } = difficulties[difficulty];
                 return (
                   <div
-                    className="difficulty"
+                    className="difficulty clk-btn"
                     key={difficulty}
                     onClick={() => handleStart(rows, cols)}
                   >
@@ -210,14 +210,14 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
             </>
           )}
           <div
-            className="difficulty"
+            className="difficulty clk-btn"
             onClick={() => {
               setCustom((prev) => !prev);
             }}
           >
             <p className="title">{custom ? "Close" : "Custom"}</p>
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );

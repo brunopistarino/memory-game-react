@@ -24,8 +24,6 @@
     a {
       text-decoration: none;
       padding: 1rem 2rem;
-      background-color: $white;
-      border: 2px solid $black;
       border-radius: 100px;
     }
   }
@@ -99,6 +97,8 @@
     // border-bottom: 5px solid $black;
     cursor: pointer;
     border-radius: 0.5rem;
+    transform: rotateY(0);
+    transition: all 0.25s linear;
   }
 
   p {
@@ -113,22 +113,11 @@
     font-weight: bold;
     border-radius: 0.5rem;
     cursor: default;
-  }
-}
-
-.cell {
-  p {
-    transition: all 0.25s linear;
     background-color: $white;
+    transition: all 0.25s linear;
     border: 2px solid $black;
     backface-visibility: hidden;
     transform: rotateY(-180deg);
-  }
-
-  button {
-    transition: all 0.25s linear;
-    background-color: $white;
-    transform: rotateY(0);
   }
 
   &.flipped {
