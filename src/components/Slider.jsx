@@ -12,12 +12,12 @@ const Slider = ({ min, max, value, type, onChange }) => {
   //   }, [mySlider.value]);
 
   useEffect(() => {
+    const color = localStorage.getItem("color") || "#acd6b8";
     const valPercent = ((value - min) / (max - min)) * 100;
-    console.log("valPercent", valPercent);
     setStyle({
-      background: `linear-gradient(to right, #acd6b8 ${valPercent}%, #d5d5d5 ${valPercent}%)`,
+      background: `linear-gradient(to right, ${color} ${valPercent}%, #d5d5d5 ${valPercent}%)`,
     });
-  }, [value, max]);
+  }, [value, max, min]);
 
   return (
     <fieldset className="slider-container">

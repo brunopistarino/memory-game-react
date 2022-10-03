@@ -106,7 +106,7 @@ function Game({ rows, cols, couples }) {
         let number = Math.floor(Math.random() * couples) + 1;
         while (countInArray(numbers, number) >= 2) {
           number = Math.floor(Math.random() * couples) + 1;
-          console.log("number", number);
+          // console.log("number", number);
         }
         numbers.push(number);
         row.push({ value: number, isFlipped: false, isMatched: false });
@@ -114,6 +114,24 @@ function Game({ rows, cols, couples }) {
       mat.push(row);
     }
     setMatrix(mat);
+
+    console.log("numbers", numbers);
+    // ckeck for a number that appears only once
+    for (let i = 0; i < numbers.length; i++) {
+      if (countInArray(numbers, numbers[i]) === 1) {
+        console.log("number", numbers[i]);
+        // search for the cell with the number and make it matched
+        for (let j = 0; j < rows; j++) {
+          for (let k = 0; k < cols; k++) {
+            if (mat[j][k].value === numbers[i]) {
+              mat[j][k].isMatched = true;
+              setMatrix(mat);
+              break;
+            }
+          }
+        }
+      }
+    }
   }, [restart]);
 
   function countInArray(array, number) {
@@ -126,22 +144,18 @@ function Game({ rows, cols, couples }) {
     return count;
   }
 
-  useEffect(() => {
-    document
-      .querySelector('meta[name="theme-color"]')
-      .setAttribute("content", "#fcfcfc");
-  }, []);
-
   return (
     <>
       <Modal onClose={() => setIsFinished(false)} show={isFinished || menuOpen}>
         {menuOpen && (
           <div className="modal-menu">
-            <Link to="#" onClick={handleReset}>
+            <Link to="#" className="clk-btn" onClick={handleReset}>
               Restart
             </Link>
-            <Link to="/">New Game</Link>
-            <Link to="#" onClick={handleCloseMenu}>
+            <Link to="/" className="clk-btn">
+              New Game
+            </Link>
+            <Link to="#" className="clk-btn" onClick={handleCloseMenu}>
               Resume Game
             </Link>
           </div>

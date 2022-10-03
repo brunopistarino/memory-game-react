@@ -7,11 +7,6 @@ const Custom = ({ start }) => {
   const [rows, setRows] = useState(4);
   const [cols, setCols] = useState(4);
 
-  const colsRef = useRef();
-  const rowsRef = useRef();
-
-  const [couples, setCouples] = useState(8);
-  const [imposible, setImposible] = useState(false);
   const [difficulty, setDifficulty] = useState("easy");
 
   const minRows = 2;
@@ -28,16 +23,35 @@ const Custom = ({ start }) => {
     setCols(e.target.value);
   };
 
+  // useEffect(() => {
+  //   if (couples <= 5) {
+  //     setDifficulty("easy");
+  //     return;
+  //   }
+  //   if (couples <= 10) {
+  //     setDifficulty("medium");
+  //     return;
+  //   }
+  //   if (couples <= 15) {
+  //     setDifficulty("hard");
+  //     return;
+  //   }
+  //   // if (couples <= 2) {
+  //   //   setDifficulty("impossible");
+  //   //   return;
+  //   // }
+  // }, [couples]);
+
   return (
     <>
       <div className="custom-settings">
         <div className="info-row">
           <div className="info-container">
-            <p>{couples}</p>
+            <p>{(rows * cols) / 2}</p>
             <p>Parejas</p>
           </div>
           <div className="info-container">
-            {imposible ? <p>Imposible</p> : <p>{difficulty}</p>}
+            <p>{difficulty}</p>
             <p>Difficulty</p>
           </div>
         </div>
@@ -58,15 +72,9 @@ const Custom = ({ start }) => {
             onChange={handleColsChange}
           />
         </div>
-        {imposible ? (
-          <button className="start" disabled>
-            Start Game
-          </button>
-        ) : (
-          <button className="start" onClick={() => start(rows, cols)}>
-            Start Game
-          </button>
-        )}
+        <button className="start" onClick={() => start(rows, cols)}>
+          Start Game
+        </button>
       </div>
 
       <Link className="difficulty clk-btn" to="/">

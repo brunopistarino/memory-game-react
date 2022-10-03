@@ -6,6 +6,7 @@ $orange-600: #ff9d00;
 $orange-300: #feb94a;
 $gray-100: #dfe7ec;
 
-$main-color: #acd6b8;
+// $main-color: #acd6b8;
+$main-color: var(--main-color);
 $white: #fff;
 $black: #000;
