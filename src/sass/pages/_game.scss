@@ -1,56 +1,11 @@
-// .game-board {
-//   display: flex;
-//   flex-direction: column;
-//   border: 1px solid #000;
-//   gap: 1rem;
-// }
-
-// .row {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: center;
-//   align-items: center;
-//   gap: 1rem;
-//   flex-grow: 1;
-// }
-
-// .cell {
-//   // padding: 1rem;
-//   background-color: $primary-600;
-//   border-radius: 0.25rem;
-//   flex-grow: 1;
-//   height: 100%;
-//   aspect-ratio: 1/1;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   border: none;
-//   padding: 2rem;
-//   color: #fff;
-
-//   .cell-number {
-//     width: 1rem;
-//     height: 1rem;
-//     // font-size: 2rem;
-//     font-weight: bold;
-//   }
-
-//   &.flipped {
-//     background-color: #282c34;
-//     color: white;
-//   }
-// }
-
 #game-view {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  background-color: $bg-color;
   padding: 3.5rem;
 
-  // min-height: 100vh;
   min-height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
   min-height: calc(var(--vh, 1vh) * 100);
 
@@ -67,10 +22,10 @@
     }
 
     a {
-      color: white;
       text-decoration: none;
       padding: 1rem 2rem;
-      background-color: #384c75;
+      background-color: $white;
+      border: 2px solid $black;
       border-radius: 100px;
     }
   }
@@ -78,9 +33,6 @@
   main {
     width: 100%;
     max-width: 70vw;
-    // height: 100%;
-    // max-height: 50vh;
-    // height: 700px;
   }
 
   footer {
@@ -88,13 +40,13 @@
     gap: 1rem;
     width: 100%;
     justify-content: center;
-    // max-width: 800px;
 
     .data-field {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #dfe7ec;
+      background-color: $white;
+      border: 2px solid black;
       border-radius: 0.5rem;
       padding: 1rem 2rem;
       flex: 1 1 25%;
@@ -119,31 +71,13 @@
 .game-board {
   display: flex;
   flex-direction: column;
-  // border: 1px solid #000;
   gap: 1rem;
-  // max-height: 50vh;
-  // height: 100%;
-  // width: min(100%, 800px);
-  // width: 600px;
-  // width: 100%;
-  // width: clamp(300px, 50%, 800px);
 
   .row {
     display: flex;
     justify-content: center;
-    // flex-grow: 1;
-    // flex-basis: 0;
-    // display: grid;
-    // grid-template-columns: repeat(4, 1fr);
-
-    // width: 100%;
-    // max-width: 600px;
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items: center;
     flex: 1;
     gap: 1rem;
-    // flex-grow: 1;
   }
 }
 
@@ -160,9 +94,10 @@
     height: 100%;
     position: absolute;
     border: none;
-    background-color: $primary-600;
+    background-color: $white;
+    border: 2px solid $black;
+    // border-bottom: 5px solid $black;
     cursor: pointer;
-    // background-color: rgba(0, 0, 0, 0.374);
     border-radius: 0.5rem;
   }
 
@@ -173,7 +108,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: $black;
     font-size: 3rem;
     font-weight: bold;
     border-radius: 0.5rem;
@@ -182,9 +117,21 @@
 }
 
 .cell {
-  &.flipped {
-    // color: white;
+  p {
+    transition: all 0.25s linear;
+    background-color: $white;
+    border: 2px solid $black;
+    backface-visibility: hidden;
+    transform: rotateY(-180deg);
+  }
 
+  button {
+    transition: all 0.25s linear;
+    background-color: $white;
+    transform: rotateY(0);
+  }
+
+  &.flipped {
     button {
       transform: rotateY(-180deg);
     }
@@ -195,74 +142,30 @@
 
   &.matched {
     button {
-      background-color: #dfe7ec;
-      transform: rotateY(-180deg);
       animation-delay: 250ms;
+      transform: rotateY(-180deg);
+      opacity: 0;
     }
     p {
+      animation-delay: 250ms;
       transform: rotateY(0);
-      // color: #7191a5;
-      background-color: #dfe7ec;
+      color: $main-color;
+      border: none;
+      opacity: 0.5;
     }
-  }
-
-  p {
-    // transition: transform 0.25s linear;
-    transition: all 0.25s linear, background-color 0.25s linear 300ms;
-    // transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
-    background-color: $orange-500;
-    backface-visibility: hidden;
-    transform: rotateY(-180deg);
-  }
-
-  button {
-    // transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
-    // transition: transform 0.25s linear;
-    transition: all 0.25s linear;
-
-    transform: rotateY(0);
   }
 }
 
-// .cell {
-//   &.matched {
-//     button {
-//       transform: scale(0);
-//     }
-//     p {
-//       // background-color: #00b894;
-//     }
-//   }
-
-//   &.flipped {
-//     button {
-//       transform: scale(0);
-//     }
-//     p {
-//       background-color: #fda214;
-//     }
-//   }
-//   button,
-//   p {
-//     transition: all 0.3s cubic-bezier(0.65, 0.05, 0.36, 1);
-//   }
-// }
-
 @media screen and (max-width: 768px) {
-  // .game-board {
-  // }
   #game-view {
-    // padding: 1.5rem;
     padding: 1rem;
     main {
       max-width: 90vw;
     }
     .game-board {
-      // gap: 0.75rem;
       gap: 0.5rem;
     }
     .row {
-      // gap: 0.75rem;
       gap: 0.5rem;
 
       &.two-chars p {
@@ -271,7 +174,6 @@
       & .cell.two-char p {
         font-size: 1.75rem;
       }
-      // .cell.
     }
     // .cell p {
     // font-size: 2rem;

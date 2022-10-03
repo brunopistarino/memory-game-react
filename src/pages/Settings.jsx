@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Slider from "../components/Slider";
 
-// import { ReactComponent as Icon } from "../assets/icons/settings.svg";
 import { ReactComponent as CustomizeIcon } from "../brush-01.svg";
-// import { ReactComponent as Logo } from "../icons/logomark2.svg";
 
 const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [rows, setRows] = useState(4);
@@ -17,10 +15,8 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const [custom, setCustom] = useState(false);
 
   const minRows = 2;
-  // const maxRows = 8;
   const maxRows = 8;
   const minCols = 2;
-  // const maxCols = 8;
   const maxCols = 8;
 
   const navigate = useNavigate();
