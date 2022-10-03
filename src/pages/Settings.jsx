@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Slider from "../components/Slider";
+import Colors from "../components/Colors";
+import Custom from "../components/Custom";
+import Difficulties from "../components/Difficulties";
 
 import { ReactComponent as CustomizeIcon } from "../brush-01.svg";
 
@@ -130,6 +134,12 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
         </header>
 
         <main>
+          <Routes>
+            <Route path="" element={<Difficulties />} />
+            <Route path="colors" element={<Colors />} />
+            <Route path="custom" element={<Custom />} />
+          </Routes>
+
           {custom ? (
             <div className="custom-settings">
               <div className="info-row">

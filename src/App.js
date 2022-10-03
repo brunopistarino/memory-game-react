@@ -32,7 +32,7 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/"
+          path="/*"
           element={
             <Settings
               updateRows={handleRows}
