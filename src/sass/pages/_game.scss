@@ -6,12 +6,13 @@
   gap: 1rem;
   padding: 3.5rem;
 
-  min-height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
-  min-height: calc(var(--vh, 1vh) * 100);
+  // min-height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
+  // min-height: calc(var(--vh, 1vh) * 100);
+  height: calc(var(--vh, 1vh) * 100);
 
   header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     width: 100%;
     max-width: 800px;
@@ -25,12 +26,20 @@
       text-decoration: none;
       padding: 1rem 2rem;
       border-radius: 100px;
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
     }
   }
 
   main {
     width: 100%;
-    max-width: 70vw;
+    // max-width: 70vw;
+    display: flex;
+    justify-content: center;
   }
 
   footer {
@@ -63,27 +72,33 @@
 
   .menu-btn {
     display: none;
+    padding: 0.75rem;
+    svg {
+      display: block;
+      width: 1.75rem;
+      height: 1.75rem;
+    }
   }
 }
 
 .game-board {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  width: min(100%, 60vh);
   gap: 1rem;
 
-  .row {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    gap: 1rem;
+  &.big {
+    gap: 0.5rem;
+  }
+  &.small {
+    p {
+      font-size: min(10vw, 3rem);
+    }
   }
 }
 
 .cell {
   position: relative;
-  aspect-ratio: 1/1;
-  flex: 1;
-  max-width: 7rem;
+  aspect-ratio: 1;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
@@ -109,7 +124,8 @@
     justify-content: center;
     align-items: center;
     color: $black;
-    font-size: 3rem;
+    // font-size: 3rem;
+    font-size: min(5vw, 3rem);
     font-weight: bold;
     border-radius: 0.5rem;
     cursor: default;
@@ -148,28 +164,12 @@
 @media screen and (max-width: 768px) {
   #game-view {
     padding: 1rem;
-    main {
-      max-width: 90vw;
-    }
     .game-board {
       gap: 0.5rem;
-    }
-    .row {
-      gap: 0.5rem;
-
-      &.two-chars p {
-        font-size: 2rem;
-      }
-      & .cell.two-char p {
-        font-size: 1.75rem;
+      &.big {
+        gap: 0.25rem;
       }
     }
-    // .cell p {
-    // font-size: 2rem;
-    // }
-    // .cell.two-char p {
-    // font-size: 1.5rem;
-    // }
     footer {
       flex-direction: column;
       .data-field {

@@ -5,6 +5,8 @@ import Cell from "../components/Cell";
 import Timer from "../components/Timer";
 import Modal from "../components/Modal";
 
+import { ReactComponent as MenuIcon } from "../icons/menu-01.svg";
+
 function Game({ rows, cols, couples }) {
   const [matrix, setMatrix] = useState([]);
   const [flippedCells, setFlippedCells] = useState([]);
@@ -163,11 +165,17 @@ function Game({ rows, cols, couples }) {
         {isFinished && (
           <div className="modal-finished">
             <h1>You won!</h1>
-            <p>
-              You finished the game in {moves} moves and in{" "}
-              {/* <Timer stop={stopTimer} /> */}
-            </p>
-            <Link to="/" onClick={handleReset}>
+            <div className="data-container">
+              <div className="data-field">
+                <p>Time</p>
+                <Timer restart={restart} stop={stopTimer} />
+              </div>
+              <div className="data-field">
+                <p>Moves</p>
+                <h2>{moves}</h2>
+              </div>
+            </div>
+            <Link to="/" className="clk-btn" onClick={handleReset}>
               New Game
             </Link>
           </div>
@@ -177,7 +185,7 @@ function Game({ rows, cols, couples }) {
         {!rows || !cols ? <Navigate to="/" /> : null}
 
         <header>
-          <h1>memory</h1>
+          <h1>numatch</h1>
           <div className="buttons">
             <Link className="button clk-btn" to="#" onClick={handleReset}>
               Restart
@@ -186,15 +194,18 @@ function Game({ rows, cols, couples }) {
               New Game
             </Link>
             <Link className="menu-btn clk-btn" to="#" onClick={handleOpenMenu}>
-              Menu
+              <MenuIcon />
             </Link>
           </div>
         </header>
 
         <main>
-          <div className="game-board">
+          <div
+            className={`game-board ${couples >= 10 ? "big" : "small"}`}
+            style={{ gridTemplateColumns: `repeat(${rows}, 1fr)` }}
+          >
             {matrix.map((row, i) => (
-              <div className={`row ${couples >= 10 && "two-chars"}`} key={i}>
+              <>
                 {row.map((cell, j) => (
                   <Cell
                     key={j}
@@ -209,7 +220,7 @@ function Game({ rows, cols, couples }) {
                     )}
                   />
                 ))}
-              </div>
+              </>
             ))}
           </div>
         </main>

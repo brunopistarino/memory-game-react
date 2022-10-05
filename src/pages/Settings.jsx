@@ -4,7 +4,7 @@ import Colors from "../components/Colors";
 import Custom from "../components/Custom";
 import Difficulties from "../components/Difficulties";
 
-import { ReactComponent as CustomizeIcon } from "../brush-01.svg";
+import { ReactComponent as CustomizeIcon } from "../icons/brush-01.svg";
 
 const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Settings = ({ updateRows, updateCols, updateCouples }) => {
     <div id="settings-view">
       <div className="container">
         <header>
-          <h1>memory</h1>
+          <h1>numatch</h1>
           <Link to="/colors">
             <div className="clk-btn">
               <CustomizeIcon />
