@@ -15,6 +15,7 @@ function Game({ rows, cols, couples }) {
   const [isFinished, setIsFinished] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [stopTimer, setStopTimer] = useState(false);
+  const [time, setTime] = useState(0);
 
   const handleClick = (row, col) => {
     if (flippedCells.length === 2) {
@@ -27,7 +28,10 @@ function Game({ rows, cols, couples }) {
     newMatrix[row][col].isFlipped = true;
     setMatrix(newMatrix);
     setFlippedCells([...flippedCells, { row, col }]);
-    console.log("clicked", row, col);
+  };
+
+  const handleTime = (time) => {
+    setTime(time);
   };
 
   // prove if selected cells match
@@ -38,20 +42,17 @@ function Game({ rows, cols, couples }) {
         matrix[firstCell.row][firstCell.col].value ===
         matrix[secondCell.row][secondCell.col].value
       ) {
-        console.log("match");
         matrix[firstCell.row][firstCell.col].isMatched = true;
         matrix[secondCell.row][secondCell.col].isMatched = true;
         setFlippedCells([]);
         checkIfWon();
       } else {
-        console.log("no match");
         setTimeout(function () {
           setFlippedCells([]);
         }, 700);
       }
       setMoves(moves + 1);
     }
-    console.log("flippedCells", flippedCells);
   }, [flippedCells]);
 
   const checkIfWon = () => {
@@ -86,17 +87,9 @@ function Game({ rows, cols, couples }) {
 
   useEffect(() => {
     if (isFinished) {
-      // console.log("game ended");
-      // alert("You won!");
       setStopTimer(true);
     }
   }, [isFinished]);
-
-  // useEffect(() => {
-  //   if (checkIfWon()) {
-  //     setIsFinished(true);
-  //   }
-  // }, [matrix]);
 
   // load matrix with couples of numbers that didn't repeat
   useEffect(() => {
@@ -108,7 +101,6 @@ function Game({ rows, cols, couples }) {
         let number = Math.floor(Math.random() * couples) + 1;
         while (countInArray(numbers, number) >= 2) {
           number = Math.floor(Math.random() * couples) + 1;
-          // console.log("number", number);
         }
         numbers.push(number);
         row.push({ value: number, isFlipped: false, isMatched: false });
@@ -117,11 +109,9 @@ function Game({ rows, cols, couples }) {
     }
     setMatrix(mat);
 
-    console.log("numbers", numbers);
     // ckeck for a number that appears only once
     for (let i = 0; i < numbers.length; i++) {
       if (countInArray(numbers, numbers[i]) === 1) {
-        console.log("number", numbers[i]);
         // search for the cell with the number and make it matched
         for (let j = 0; j < rows; j++) {
           for (let k = 0; k < cols; k++) {
@@ -148,7 +138,7 @@ function Game({ rows, cols, couples }) {
 
   return (
     <>
-      <Modal onClose={() => setIsFinished(false)} show={isFinished || menuOpen}>
+      <Modal show={isFinished || menuOpen}>
         {menuOpen && (
           <div className="modal-menu">
             <Link to="#" className="clk-btn" onClick={handleReset}>
@@ -168,7 +158,7 @@ function Game({ rows, cols, couples }) {
             <div className="data-container">
               <div className="data-field">
                 <p>Time</p>
-                <Timer restart={restart} stop={stopTimer} />
+                <h2>{time}</h2>
               </div>
               <div className="data-field">
                 <p>Moves</p>
@@ -228,7 +218,7 @@ function Game({ rows, cols, couples }) {
         <footer>
           <div className="data-field">
             <p>Time</p>
-            <Timer restart={restart} stop={stopTimer} />
+            <Timer restart={restart} stop={stopTimer} update={handleTime} />
           </div>
           <div className="data-field">
             <p>Moves</p>

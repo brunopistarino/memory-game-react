@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Slider from "../components/Slider";
@@ -16,43 +16,39 @@ const Custom = ({ start }) => {
 
   const handleRowsChange = (e) => {
     setRows(e.target.value);
-    console.log("rows", e.target.value);
   };
 
   const handleColsChange = (e) => {
     setCols(e.target.value);
   };
 
-  // useEffect(() => {
-  //   if (couples <= 5) {
-  //     setDifficulty("easy");
-  //     return;
-  //   }
-  //   if (couples <= 10) {
-  //     setDifficulty("medium");
-  //     return;
-  //   }
-  //   if (couples <= 15) {
-  //     setDifficulty("hard");
-  //     return;
-  //   }
-  //   // if (couples <= 2) {
-  //   //   setDifficulty("impossible");
-  //   //   return;
-  //   // }
-  // }, [couples]);
+  useEffect(() => {
+    const couples = (rows * cols) / 2;
+    if (couples <= 8) {
+      setDifficulty("easy");
+      return;
+    }
+    if (couples <= 16) {
+      setDifficulty("medium");
+      return;
+    }
+    if (couples <= 24) {
+      setDifficulty("hard");
+      return;
+    }
+  }, [rows, cols]);
 
   return (
     <>
       <div className="custom-settings">
         <div className="info-row">
           <div className="info-container">
+            <p>Pairs</p>
             <p>{(rows * cols) / 2}</p>
-            <p>Parejas</p>
           </div>
           <div className="info-container">
-            <p>{difficulty}</p>
             <p>Difficulty</p>
+            <p>{difficulty}</p>
           </div>
         </div>
         <div className="sliders">

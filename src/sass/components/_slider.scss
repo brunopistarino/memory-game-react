@@ -1,9 +1,4 @@
 .slider-container {
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-around;
-  // padding: 30px 20px;
-
   .slider-input {
     display: flex;
     align-items: center;
@@ -73,7 +68,8 @@
     color: #ffffff;
     text-align: center;
     font-family: "Roboto Mono", monospace;
-    padding: 10px 1.5rem;
+    padding: 8px 1.5rem;
     border-radius: 5px;
+    font-size: 1.25rem;
   }
 }

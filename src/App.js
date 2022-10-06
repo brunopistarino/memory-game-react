@@ -24,11 +24,6 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("rows", rows);
-    console.log("cols", cols);
-  }, [rows, cols]);
-
-  useEffect(() => {
     const color = localStorage.getItem("color") || "#acd6b8";
     document.documentElement.style.setProperty("--main-color", color);
     document

@@ -1,26 +1,11 @@
-import { useState, useEffect } from "react";
-
-const Modal = ({ children, onClose, show }) => {
-  //   const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    // setShow(true);
-  }, []);
-
-  const handleClose = () => {
-    // setShow(false);
-    onClose();
-  };
-
+const Modal = ({ children, show }) => {
   if (!show) {
     return null;
   }
 
   return (
-    <div className={`modal ${show ? "show" : ""}`} onClick={handleClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        {children}
-      </div>
+    <div className={`modal ${show ? "show" : ""}`}>
+      <div className="modal-content">{children}</div>
     </div>
   );
 };

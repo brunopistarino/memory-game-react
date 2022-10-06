@@ -9,10 +9,6 @@ import { ReactComponent as CustomizeIcon } from "../icons/brush-01.svg";
 const Settings = ({ updateRows, updateCols, updateCouples }) => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setCouples((rows * cols) / 2);
-  // }, [rows, cols]);
-
   const handleStart = (selectedRows, selectedCols) => {
     updateRows(selectedRows);
     updateCols(selectedCols);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Timer = ({ restart, stop }) => {
+const Timer = ({ restart, stop, update }) => {
   const [seconds, setSeconds] = useState(0);
   const [time, setTime] = useState(null);
 
@@ -23,6 +23,10 @@ const Timer = ({ restart, stop }) => {
   useEffect(() => {
     setTime(new Date(seconds * 1000).toISOString().substring(14, 19));
   }, [seconds]);
+
+  useEffect(() => {
+    update(time);
+  }, [time, update]);
 
   return <h2>{time}</h2>;
 };

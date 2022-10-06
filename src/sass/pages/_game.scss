@@ -6,8 +6,7 @@
   gap: 1rem;
   padding: 3.5rem;
 
-  // min-height: 100vh; /* Use vh as a fallback for browsers that do not support Custom Properties */
-  // min-height: calc(var(--vh, 1vh) * 100);
+  /* Use vh as a fallback for browsers that do not support Custom Properties */
   height: calc(var(--vh, 1vh) * 100);
 
   header {
@@ -37,7 +36,6 @@
 
   main {
     width: 100%;
-    // max-width: 70vw;
     display: flex;
     justify-content: center;
   }
@@ -59,12 +57,7 @@
       flex: 1 1 25%;
       max-width: 15rem;
 
-      p {
-        // color: #7191a5;
-        // font-family: "Space Mono", monospace;
-      }
       h2 {
-        // color: $primary-600;
         @include number-md-bold;
       }
     }
@@ -109,7 +102,6 @@
     border: none;
     background-color: $white;
     border: 2px solid $black;
-    // border-bottom: 5px solid $black;
     cursor: pointer;
     border-radius: 0.5rem;
     transform: rotateY(0);
@@ -124,7 +116,6 @@
     justify-content: center;
     align-items: center;
     color: $black;
-    // font-size: 3rem;
     font-size: min(5vw, 3rem);
     font-weight: bold;
     border-radius: 0.5rem;
@@ -181,6 +172,14 @@
     }
     .button {
       display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-finished {
+    .data-container {
+      flex-direction: column;
     }
   }
 }
